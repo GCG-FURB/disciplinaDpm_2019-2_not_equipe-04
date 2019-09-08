@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar *ngIf="teste">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Adicionar o item: Feijão</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="retangle {{teste ? 'blur' : null}}">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button side="start" (click)="goToCart()">
+        <ion-icon name="cart"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+  <div class="image" *ngIf="teste">
+    <img class="center" src="https://tempodecozimento.com.br/wp-content/uploads/2017/10/feij%C3%A3o-preto.jpg">
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="question()" side="start">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+
+</ion-content>
