@@ -4,11 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcrypt": "^3.0.6",
+    "express": "^4.17.1",
+    "nodemon": "^1.19.2",
+    "sequelize": "^5.18.4",
+    "sequelize-cli": "^5.5.1"
+  },
+  "devDependencies": {
+    "sucrase": "^3.10.1"
   }
 }
