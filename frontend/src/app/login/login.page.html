@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Acesse sua conta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br><br><br>
+  <div class="container-fluid">
+    <form>
+      <ion-list>
+        <ion-item>
+          <ion-label>E-mail</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Senha</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </ion-list>
+      <ion-button expand="full">Acessar</ion-button>
+    </form>
+    <div style="width: 100%; margin-top: 15%;">
+      <p align="center">
+        <a (click)="createAccount()">
+          Cadastre-se
+        </a>
+      </p>
+    </div>
+  </div>
+</ion-content>

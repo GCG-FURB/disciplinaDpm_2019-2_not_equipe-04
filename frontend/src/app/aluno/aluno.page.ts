@@ -11,8 +11,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
   styleUrls: ['./aluno.page.scss'],
 })
 export class AlunoPage implements OnInit {
-
-  public teste = false;
+  public image = 'https://www.autoo.com.br/fotos/2018/10/1280_960/volkswagen_t-cross_2020_1_25102018_10913_1280_960.jpg';
+  public itemName = 'Carro zero';
 
   constructor(
     private qrScanner: QRScanner,
@@ -22,38 +22,42 @@ export class AlunoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    setInterval(() => {
-      this.teste = true;
-    }, 3000);
   }
 
   ionViewWillEnter() {
     this.qrScanner.prepare()
-      .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          const scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            console.log('Scanned something', text);
+    .then((status: QRScannerStatus) => {
+      if (status.authorized) {
+        this.qrCode();
+      } else if (status.denied) {
+        this.androidPermissions.requestPermissions(
+          [
+            this.androidPermissions.PERMISSION.CAMERA
+          ]
+        );
+      } else {
+        alert('Preciso de permissão para camera');
+        this.router.navigate(['/home']);
+      }
+    })
+    .catch((e: any) => console.log('Error is', e));
+  }
 
-            this.qrScanner.hide();
-            scanSub.unsubscribe();
-          });
+  private qrCode() {
+    const scanSub = this.qrScanner
+      .scan()
+      .subscribe(async (id: string) => {
+        scanSub.unsubscribe();
+        await this.onQrCode(id);
+    });
+  }
 
-        } else if (status.denied) {
-          this.androidPermissions.requestPermissions(
-            [
-              this.androidPermissions.PERMISSION.CAMERA
-            ]
-          );
-        } else {
-          alert('Preciso de permissão para camera');
-          this.router.navigate(['/home']);
-        }
-      })
-      .catch((e: any) => console.log('Error is', e));
+  private async onQrCode(id) {
+    // enviar para o backend
   }
 
   public close() {
-    this.teste = false;
+    this.image = '';
   }
 
   public goToCart() {
@@ -61,9 +65,10 @@ export class AlunoPage implements OnInit {
   }
 
   public async question() {
+    // requisitar a pergunta
     const alert = await this.alertController.create({
       header: 'Responda',
-      message: "Qual é a resposta de 5 + 5?",
+      message: "",
       inputs: [
         {
           name: 'response',
