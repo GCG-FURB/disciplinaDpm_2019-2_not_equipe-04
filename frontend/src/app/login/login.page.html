@@ -19,7 +19,7 @@
           <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
       </ion-list>
-      <ion-button expand="full" [disabled]="!formGroup.valid">Acessar</ion-button>
+      <ion-button expand="full" [disabled]="!formGroup.valid" (click)="create()">Acessar</ion-button>
     </form>
     <div style="width: 100%; margin-top: 15%;">
       <p align="center">

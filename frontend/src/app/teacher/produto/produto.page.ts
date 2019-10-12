@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ProdutoPage implements OnInit {
 
-  @ViewChild('image') image: ElementRef;
+  // @ViewChild('image') image: ElementRef;
 
   public formGroup: FormGroup;
 
@@ -25,7 +25,7 @@ export class ProdutoPage implements OnInit {
   }
 
   public selectImage() {
-    this.image.nativeElement.click();
+    // this.image.nativeElement.click();
   }
 
 }

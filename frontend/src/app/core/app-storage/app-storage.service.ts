@@ -9,7 +9,7 @@ export class AppStorageService {
 
   private keys = {
     nomeAluno: `${this.key}.nome.aluno`,
-    token: `${this.key}.token`
+    teacher: `${this.key}.teacher`
   }
 
   constructor() { }
@@ -24,13 +24,13 @@ export class AppStorageService {
     return aluno ? JSON.parse(aluno) : null;
   }
   
-  public setToken(token) {
-    const tokenStr = JSON.stringify(token);
-    localStorage.setItem(this.keys.token, tokenStr);
+  public setTeacher(teacher) {
+    const teacherStr = JSON.stringify(teacher);
+    localStorage.setItem(this.keys.teacher, teacherStr);
   }
 
-  public getToken() {
-    const token = localStorage.getItem(this.keys.token);
-    return token ? JSON.parse(token) : null;
+  public getTeacher() {
+    const teacher = localStorage.getItem(this.keys.teacher);
+    return teacher ? JSON.parse(teacher) : null;
   }
 }

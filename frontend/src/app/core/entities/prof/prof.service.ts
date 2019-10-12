@@ -11,11 +11,11 @@ export class ProfService {
     public httpClient: HttpClient
   ) { }
 
-  public create(person) {
-    return this.httpClient.post(`${environment.api}/teacher`, person);
+  public create(teacher) {
+    return this.httpClient.post(`${environment.api}/teachers`, teacher);
   }
 
-  public login(person) {
-    return this.httpClient.post(`${environment.api}/login`, person);
+  public login(teacher) {
+    return this.httpClient.post(`${environment.api}/login`, teacher);
   }
 }
