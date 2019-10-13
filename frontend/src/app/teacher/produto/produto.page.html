@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <input style="float: left; margin-top: -100px" type="file" accept="image/*" #image>
+  <input (change)="onChangeImage($event)" style="float: left; margin-top: -100px" type="file" accept="image/*" #image>
   <div class="container-fluid">
     <br><br><br>
     <form [formGroup]="formGroup">
@@ -23,10 +23,11 @@
           <ion-input formControlName="price"></ion-input>
         </ion-item>
         <br>
-        <ion-button (click)="selectImage()">Foto do produto</ion-button>  
+        <ion-button (click)="selectImage()">Foto do produto</ion-button>
+        <img *ngIf="formGroup.get('image').value" [src]="formGroup.get('image').value" style="width: 50px; height: 50px; margin-left: 20px;">
       </ion-list>
       <br>
-      <ion-button expand="full" [disabled]="!formGroup.valid">Cadastrar</ion-button>
+      <ion-button expand="full" [disabled]="!formGroup.valid" (click)="save()">Cadastrar</ion-button>
     </form>
   </div>
 </ion-content>

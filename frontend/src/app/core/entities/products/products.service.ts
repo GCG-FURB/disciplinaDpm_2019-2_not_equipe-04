@@ -17,4 +17,8 @@ export class ProductsService {
     const teacher = this.appStorage.getTeacher();
     return this.httpClient.get(`${environment.api}/products/${teacher.id}`);
   }
+
+  public create(product) {
+    return this.httpClient.post(`${environment.api}/products`, product);
+  }
 }

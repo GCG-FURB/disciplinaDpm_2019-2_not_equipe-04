@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { ProductsService } from '../core/entities/products/products.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class TeacherPage {
 
   constructor(
     private loadingController: LoadingController,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private actionSheetController: ActionSheetController
   ) { }
 
   ionViewWillEnter() {
@@ -25,8 +26,33 @@ export class TeacherPage {
       message: 'Aguarde...'
     });
     this.products = await this.productsService.getProducts().toPromise();
-    debugger
     loader.dismiss();
+  }
+
+  public async actionSheet(object) {
+    const actionSheet = await this.actionSheetController.create({
+      header: `Detalhes do ${object.name}`,
+      buttons: [{
+        text: 'Editar',
+        icon: 'create',
+        handler: () => {
+          console.log('Delete clicked');
+        }
+      },
+      {
+        text: 'Remover',
+        icon: 'trash',
+        handler: () => {
+          console.log('Delete clicked');
+        }
+      },
+      {
+        text: 'Cancelar',
+        icon: 'close',
+        role: 'cancel'
+      }]
+    });
+    await actionSheet.present();
   }
 
 }
