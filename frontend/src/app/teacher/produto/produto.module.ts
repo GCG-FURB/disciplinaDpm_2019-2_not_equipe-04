@@ -9,7 +9,7 @@ import { ProdutoPage } from './produto.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: ':id',
     component: ProdutoPage
   }
 ];

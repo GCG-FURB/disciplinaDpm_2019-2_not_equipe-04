@@ -23,7 +23,12 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Product> findById(@PathVariable Long id) throws Exception {
+		return ResponseEntity.ok(this.productService.findById(id));
+	}
+	
+	@RequestMapping(value = "/{id}/teacher", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Product>> getProducts(@PathVariable Long id) {
 		return ResponseEntity.ok().body(this.productService.findByTeacher(id));
 	}
@@ -31,6 +36,11 @@ public class ProductController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Product> create(@Valid @RequestBody Product product) {
 		return ResponseEntity.ok().body(this.productService.create(product));
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Product> update(@PathVariable Long id, @Valid @RequestBody Product product) throws Exception {
+		return ResponseEntity.ok(this.productService.update(id, product));
 	}
 	
 }

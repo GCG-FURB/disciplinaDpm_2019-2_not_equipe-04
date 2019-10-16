@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ActionSheetController } from '@ionic/angular';
 import { ProductsService } from '../core/entities/products/products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher',
@@ -14,7 +15,8 @@ export class TeacherPage {
   constructor(
     private loadingController: LoadingController,
     private productsService: ProductsService,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private router: Router
   ) { }
 
   ionViewWillEnter() {
@@ -29,6 +31,11 @@ export class TeacherPage {
     loader.dismiss();
   }
 
+  public exit() {
+    localStorage.clear();
+    this.router.navigate(['/home']);
+  }
+
   public async actionSheet(object) {
     const actionSheet = await this.actionSheetController.create({
       header: `Detalhes do ${object.name}`,
@@ -36,7 +43,7 @@ export class TeacherPage {
         text: 'Editar',
         icon: 'create',
         handler: () => {
-          console.log('Delete clicked');
+          this.router.navigate(['/teacher/produto/', object.id]);
         }
       },
       {

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { ProductsService } from 'src/app/core/entities/products/products.service';
 import { AppStorageService } from 'src/app/core/app-storage/app-storage.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-produto',
@@ -16,13 +16,16 @@ export class ProdutoPage implements OnInit {
 
   public formGroup: FormGroup;
 
+  private id: string;
+
   constructor(
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private toastController: ToastController,
     private productService: ProductsService,
     private appStorageService: AppStorageService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,19 @@ export class ProdutoPage implements OnInit {
       image: [null, Validators.compose([Validators.required])]
     });
   }
+
+  ionViewWillEnter() {
+    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    if (!this.isNew()) {
+      this.getProduct().then();
+    }
+  }
+
+  private async getProduct() {
+    const form = await this.productService.getProduct(this.id).toPromise();
+    this.formGroup.patchValue(form);
+  }
+
 
   public selectImage() {
     this.image.nativeElement.click();
@@ -46,6 +62,10 @@ export class ProdutoPage implements OnInit {
     }
   }
 
+  public isNew() {
+    return this.id === 'new';
+  }
+
   public async save() {
     const loader = await this.loadingController.create({
       message: 'Aguarde..'
@@ -54,8 +74,12 @@ export class ProdutoPage implements OnInit {
       if (this.formGroup.valid) {
         const { value } = this.formGroup;
         value.teacher = this.appStorageService.getTeacher();
-        await this.productService.create(value).toPromise();
-        this.router.navigate(['/teacher']);
+        if (this.isNew()) {
+          await this.productService.create(value).toPromise();
+          this.router.navigate(['/teacher']);
+        } else {
+          await this.productService.atualizar(this.id, value).toPromise();
+        }
       } else {
         const toast = await this.toastController.create({
           message: 'Verifique os campos obrigatórios',

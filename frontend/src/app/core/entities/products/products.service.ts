@@ -15,10 +15,18 @@ export class ProductsService {
 
   public getProducts() {
     const teacher = this.appStorage.getTeacher();
-    return this.httpClient.get(`${environment.api}/products/${teacher.id}`);
+    return this.httpClient.get(`${environment.api}/products/${teacher.id}/teacher`);
+  }
+
+  public getProduct(id: string) {
+    return this.httpClient.get(`${environment.api}/products/${id}`);
   }
 
   public create(product) {
     return this.httpClient.post(`${environment.api}/products`, product);
+  }
+
+  public atualizar(id, product) {
+    return this.httpClient.post(`${environment.api}/products/${id}`, product);
   }
 }

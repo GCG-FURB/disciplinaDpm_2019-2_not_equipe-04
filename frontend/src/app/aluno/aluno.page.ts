@@ -11,7 +11,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
   styleUrls: ['./aluno.page.scss'],
 })
 export class AlunoPage implements OnInit {
-  public image = 'https://www.autoo.com.br/fotos/2018/10/1280_960/volkswagen_t-cross_2020_1_25102018_10913_1280_960.jpg';
+  public image = '';
   public itemName = 'Carro zero';
 
   constructor(

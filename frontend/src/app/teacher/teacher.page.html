@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Mercadinho</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="exit()">
+        sair
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
   <ion-segment>
     <ion-segment-button value="friends">
@@ -18,16 +23,19 @@
       <ion-item (click)="actionSheet(product)">
         <ion-label>{{product?.name}}</ion-label>
         <ion-label>R$ {{product?.price}}</ion-label>
+        <ion-button>
+          Detalhes
+        </ion-button>
       </ion-item>
     </ion-list>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/teacher/produto']">
+    <ion-fab-button [routerLink]="['/teacher/produto/new']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
 
 <ng-template #empty>
-  <span>Não há registros cadastrados</span>
+  <span style="text-align: center;">Não há registros cadastrados</span>
 </ng-template>
