@@ -13,38 +13,36 @@ class ProductController {
     });
 
     if (productExist) {
-      return res.json(productExist);
+      return res.status(200).json(productExist);
     }
-
+    console.log(req.body);
     const { name, price } = await Product.create(req.body);
 
-    return res.json({ name, price });
+    return res.status(200).json({ name, price });
   }
   async show(req, res) {
     const { id } = req.params;
 
-    const productDb = await Product.findById(id);
+    const productDb = await Product.findByPk(id);
 
     return res.status(200).json(productDb);
   }
   async update(req, res) {
-    const { name } = req.body;
-
-    const productExist = await Product.findOne({ name });
+    const productExist = await Product.findByPk(req.params.id);
 
     if (productExist) {
-      return res.json(productExist);
+      const { name, price } = await productExist.update(req.body);
+
+      return res.json({ name, price });
     }
-
-    const { name, price } = await Product.update(req.body);
-
-    return res.json({ name, price });
   }
   async delete(req, res) {
     const { id } = req.params;
-    const productDb = await Product.findById(id);
+    const productDb = await Product.findByPk(id);
 
-    await Product.delete(productDb);
+    await productDb.destroy();
+
+    return res.status(200).json({ message: "Sucesso" });
   }
 }
 
