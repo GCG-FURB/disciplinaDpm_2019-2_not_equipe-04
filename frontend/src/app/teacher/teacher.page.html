@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Mercadinho</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="exit()">
+        sair
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-segment>
+    <ion-segment-button value="friends">
+      <ion-label>Cadastros</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="enemies">
+      <ion-label>Relatórios</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="products && products.length > 0; else empty">
+    <ion-list *ngFor="let product of products">
+      <ion-item (click)="actionSheet(product)">
+        <ion-label>{{product?.name}}</ion-label>
+        <ion-label>R$ {{product?.price}}</ion-label>
+        <ion-button>
+          Detalhes
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/teacher/produto/new']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ng-template #empty>
+  <span style="text-align: center;">Não há registros cadastrados</span>
+</ng-template>

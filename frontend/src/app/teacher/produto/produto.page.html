@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cadastro de produto</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <input (change)="onChangeImage($event)" style="float: left; margin-top: -100px" type="file" accept="image/*" #image>
+  <div class="container-fluid">
+    <br><br><br>
+    <form [formGroup]="formGroup">
+      <ion-list>
+        <ion-item>
+          <ion-label>Descrição</ion-label>
+          <ion-input formControlName="name"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label>Preço</ion-label>
+          <ion-input formControlName="price"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button (click)="selectImage()">Foto do produto</ion-button>
+        <img *ngIf="formGroup.get('image').value" [src]="formGroup.get('image').value" style="width: 50px; height: 50px; margin-left: 20px;">
+      </ion-list>
+      <br>
+      <ion-button expand="full" [disabled]="!formGroup.valid" (click)="save()">{{isNew() ? 'Cadastrar' : 'Atualizar'}}</ion-button>
+    </form>
+  </div>
+</ion-content>
