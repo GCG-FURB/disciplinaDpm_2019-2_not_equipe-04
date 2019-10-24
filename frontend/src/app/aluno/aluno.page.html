@@ -8,23 +8,19 @@
     <ion-title>Adicionar o item: {{itemName}}</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <div class="retangle {{image ? 'blur' : null}}">
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button side="start" (click)="goToCart()">
-        <ion-icon name="cart"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  </div>
+<div class="{{image ? 'blur' : null}}">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button side="start" (click)="goToCart()">
+      <ion-icon name="cart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
 
-  <div class="image" *ngIf="image">
-    <img class="center" src="{{image}}">
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-      <ion-fab-button (click)="question()" side="start">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
-  </div>
-
-
-</ion-content>
+<div class="image" *ngIf="image">
+  <img class="center" src="{{image}}">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="question()" side="start">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
