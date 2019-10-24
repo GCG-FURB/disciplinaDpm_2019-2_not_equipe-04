@@ -37,7 +37,7 @@ export class ProdutoPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id");
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
     if (!this.isNew()) {
       this.getProduct().then();
     }

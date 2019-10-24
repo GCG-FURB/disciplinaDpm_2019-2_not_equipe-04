@@ -4,6 +4,7 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { ProductsService } from '../core/entities/products/products.service';
 
 @Component({
   selector: 'app-aluno',
@@ -18,31 +19,26 @@ export class AlunoPage implements OnInit {
     private qrScanner: QRScanner,
     private router: Router,
     private alertController: AlertController,
-    private androidPermissions: AndroidPermissions
+    private androidPermissions: AndroidPermissions,
+    private productService: ProductsService
   ) { }
 
   ngOnInit() {
     this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {
         if (status.authorized) {
-          // camera permission was granted
           console.log('aqu ');
           this.qrScanner.show();
 
-          // start scanning
-          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            console.log('Scanned something', text);
-
-            this.qrScanner.hide(); // hide camera preview
-            scanSub.unsubscribe(); // stop scanning
-          });
-
         } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
+          this.androidPermissions.requestPermissions(
+            [
+              this.androidPermissions.PERMISSION.CAMERA
+            ]
+          );
         } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
+          alert('Preciso de permissão para câmera');
+          this.router.navigate(['/home']);
         }
       })
       .catch((e: any) => console.log('Error is', e));
@@ -53,24 +49,32 @@ export class AlunoPage implements OnInit {
   }
 
   private qrCode() {
-    const scanSub = this.qrScanner
-      .scan()
-      .subscribe(async (id: string) => {
-        scanSub.unsubscribe();
-        await this.onQrCode(id);
-      });
+    const scanSub = this.qrScanner.scan().subscribe((id: string) => {
+      this.onQrCode(id).then();
+      scanSub.unsubscribe();
+    });
   }
 
   private async onQrCode(id) {
-    // enviar para o backend
+    try {
+      const product = await this.productService.getProduct(id).toPromise() as any;
+      if (product && product.image) {
+        this.image = product.image;
+      } else {
+        this.qrCode();
+      }
+    } catch (err) {
+      this.qrCode();
+    }
   }
 
   public close() {
     this.image = '';
+    this.qrCode();
   }
 
   public goToCart() {
-    this.router.navigate(['/cart'])
+    this.router.navigate(['/cart']);
   }
 
   public async question() {
