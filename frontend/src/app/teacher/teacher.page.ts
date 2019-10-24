@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ActionSheetController } from '@ionic/angular';
+import { LoadingController, ActionSheetController, ModalController } from '@ionic/angular';
 import { ProductsService } from '../core/entities/products/products.service';
 import { Router } from '@angular/router';
+import { QrcodePage } from '../qrcode/qrcode.page';
 
 @Component({
   selector: 'app-teacher',
@@ -16,7 +17,8 @@ export class TeacherPage {
     private loadingController: LoadingController,
     private productsService: ProductsService,
     private actionSheetController: ActionSheetController,
-    private router: Router
+    private router: Router,
+    public modalController: ModalController
   ) { }
 
   ionViewWillEnter() {
@@ -44,6 +46,20 @@ export class TeacherPage {
         icon: 'create',
         handler: () => {
           this.router.navigate(['/teacher/produto/', object.id]);
+        }
+      },
+      {
+        text: 'Gerar qrcode',
+        icon: 'add',
+        handler: async () => {
+          const modal = await this.modalController.create({
+            component: QrcodePage,
+            componentProps: {
+              id: object.id.toString()
+            }
+          });
+          debugger
+          return await modal.present();
         }
       },
       {
