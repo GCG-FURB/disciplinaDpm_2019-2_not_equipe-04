@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { ProductsService } from '../core/entities/products/products.service';
+import { AppStorageService } from '../core/app-storage/app-storage.service';
 
 @Component({
   selector: 'app-aluno',
@@ -12,22 +13,21 @@ import { ProductsService } from '../core/entities/products/products.service';
   styleUrls: ['./aluno.page.scss'],
 })
 export class AlunoPage implements OnInit {
-  public image = '';
-  public itemName = 'Carro zero';
+  public product = '';
 
   constructor(
     private qrScanner: QRScanner,
     private router: Router,
     private alertController: AlertController,
     private androidPermissions: AndroidPermissions,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private appStorage: AppStorageService
   ) { }
 
   ngOnInit() {
     this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {
         if (status.authorized) {
-          console.log('aqu ');
           this.qrScanner.show();
 
         } else if (status.denied) {
@@ -45,7 +45,11 @@ export class AlunoPage implements OnInit {
   }
 
   ionViewWillEnter() {
-
+    setTimeout(() => {
+      if (!this.product) {
+        this.onQrCode(6).then();
+      }
+    }, 4000);
   }
 
   private qrCode() {
@@ -59,7 +63,7 @@ export class AlunoPage implements OnInit {
     try {
       const product = await this.productService.getProduct(id).toPromise() as any;
       if (product && product.image) {
-        this.image = product.image;
+        this.product = product;
       } else {
         this.qrCode();
       }
@@ -69,7 +73,7 @@ export class AlunoPage implements OnInit {
   }
 
   public close() {
-    this.image = '';
+    this.product = null;
     this.qrCode();
   }
 
@@ -78,6 +82,14 @@ export class AlunoPage implements OnInit {
   }
 
   public async question() {
+    let cart = this.appStorage.getCart();
+    if (!cart) {
+      cart = [];
+    }
+    cart.push(this.product);
+    this.appStorage.setCart(cart);
+    this.product = null;
+    return;
     // requisitar a pergunta
     const alert = await this.alertController.create({
       header: 'Responda',
