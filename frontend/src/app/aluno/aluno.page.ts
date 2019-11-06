@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { ProductsService } from '../core/entities/products/products.service';
 import { AppStorageService } from '../core/app-storage/app-storage.service';
@@ -26,6 +26,7 @@ export class AlunoPage implements OnInit {
     private productService: ProductsService,
     private appStorage: AppStorageService,
     private http: HttpClient,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
@@ -88,15 +89,6 @@ export class AlunoPage implements OnInit {
   }
 
   public async question() {
-    // let cart = this.appStorage.getCart();
-    // if (!cart) {
-    //   cart = [];
-    // }
-    // cart.push(this.product);
-    // this.appStorage.setCart(cart);
-    // this.product = null;
-    // return;
-    // requisitar a pergunta
     const alert = await this.alertController.create({
       header: this.questionItem.question,
       message: "",
@@ -117,11 +109,24 @@ export class AlunoPage implements OnInit {
           }
         }, {
           text: 'Ok',
-          handler: (event) => {
-            if (event.response == 10) {
+          handler: async (event) => {
+            if (event.response == this.questionItem.answer) {
+              let cart = this.appStorage.getCart();
+              if (!cart) {
+                cart = [];
+              }
+              cart.push(this.product);
+              this.appStorage.setCart(cart);
+              this.product = null;
               alert.dismiss();
             } else {
-              alert.dismiss();
+              const toast = await this.toastController.create({
+                message: 'Sua resposta não está correta, tente novamente',
+                duration: 2000,
+                position: "top",
+                color: "warning"
+              });
+              toast.present();
             }
           }
         }
