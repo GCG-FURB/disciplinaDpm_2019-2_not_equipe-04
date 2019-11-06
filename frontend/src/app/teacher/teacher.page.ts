@@ -39,42 +39,50 @@ export class TeacherPage {
   }
 
   public async actionSheet(object) {
-    const actionSheet = await this.actionSheetController.create({
-      header: `Detalhes do ${object.name}`,
-      buttons: [{
-        text: 'Editar',
-        icon: 'create',
-        handler: () => {
-          this.router.navigate(['/teacher/produto/', object.id]);
-        }
-      },
+    const actionSheet = await this.actionSheetController.create(
       {
-        text: 'Gerar qrcode',
-        icon: 'add',
-        handler: async () => {
-          const modal = await this.modalController.create({
-            component: QrcodePage,
-            componentProps: {
-              id: object.id.toString()
-            }
-          });
-          debugger
-          return await modal.present();
-        }
-      },
-      {
-        text: 'Remover',
-        icon: 'trash',
-        handler: () => {
-          console.log('Delete clicked');
-        }
-      },
-      {
-        text: 'Cancelar',
-        icon: 'close',
-        role: 'cancel'
-      }]
-    });
+        header: `Detalhes do ${object.name}`,
+        buttons: [{
+          text: 'Editar',
+          icon: 'create',
+          handler: () => {
+            this.router.navigate(['/teacher/produto/', object.id]);
+          }
+        },
+        {
+          text: 'Gerenciar pergunta',
+          icon: 'help',
+          handler: () => {
+            this.router.navigate([`/teacher/${object.id}/question`]);
+          }
+        },
+        {
+          text: 'Gerar qrcode',
+          icon: 'add',
+          handler: async () => {
+            const modal = await this.modalController.create({
+              component: QrcodePage,
+              componentProps: {
+                id: object.id.toString()
+              }
+            });
+            debugger
+            return await modal.present();
+          }
+        },
+        {
+          text: 'Remover',
+          icon: 'trash',
+          handler: () => {
+            console.log('Delete clicked');
+          }
+        },
+        {
+          text: 'Cancelar',
+          icon: 'close',
+          role: 'cancel'
+        }]
+      });
     await actionSheet.present();
   }
 
