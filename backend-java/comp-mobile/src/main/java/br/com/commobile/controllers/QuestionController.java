@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.commobile.models.Question;
+import br.com.commobile.models.Report;
 import br.com.commobile.services.QuestionService;
+import br.com.commobile.services.ReportService;
 
 @RestController
 @RequestMapping("/api/question")
@@ -18,6 +20,9 @@ public class QuestionController {
 
 	@Autowired
 	private QuestionService questionService;
+	
+	@Autowired
+	private ReportService reportService;
 	
 	@GetMapping(value = "/{productId}")
 	public Question get(@PathVariable Long productId) throws Exception {
@@ -27,6 +32,11 @@ public class QuestionController {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public Question create(@RequestBody Question question) throws Exception {
 		return this.questionService.create(question);
+	}
+	
+	@PostMapping(value = "/anwser")
+	public void anwser(@RequestBody Report report) {
+		this.reportService.create(report);
 	}
 	
 }

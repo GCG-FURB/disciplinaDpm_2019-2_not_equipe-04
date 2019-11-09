@@ -1,5 +1,7 @@
 package br.com.commobile.services;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,14 @@ public class QuestionService {
 	@Autowired
 	private ProductService productService;
 
+	public Question find(Integer id) {
+		Optional<Question> questio = this.questionRepository.findById(id);
+		if (questio.isPresent()) {
+			return questio.get();
+		}
+		return null;
+	}
+	
 	public Question find(Long id) throws Exception {
 		Product product = this.productService.findById(id);
 		return this.find(product);
