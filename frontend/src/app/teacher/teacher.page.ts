@@ -43,10 +43,17 @@ export class TeacherPage {
       {
         header: `Detalhes do ${object.name}`,
         buttons: [{
-          text: 'Editar',
+          text: 'Editar produto',
           icon: 'create',
           handler: () => {
             this.router.navigate(['/teacher/produto/', object.id]);
+          }
+        },
+        {
+          text: 'Relatórios de respostas',
+          icon: 'stats',
+          handler: () => {
+            this.router.navigate([`/teacher/${object.id}/question`]);
           }
         },
         {

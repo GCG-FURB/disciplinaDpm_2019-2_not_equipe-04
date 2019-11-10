@@ -22,4 +22,8 @@ public class ReportService {
 		return this.reportRepository.save(entity);
 	}
 	
+	public Object getPalyer(Integer questionId) {
+		return this.reportRepository.getPlayers(questionId);
+	}
+	
 }

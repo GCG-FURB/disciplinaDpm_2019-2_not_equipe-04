@@ -39,4 +39,8 @@ public class QuestionController {
 		this.reportService.create(report);
 	}
 	
+	@GetMapping(value = "/{id}/anwser")
+	public Object getPlayers(@PathVariable Integer id) {
+		return this.reportService.getPalyer(id);
+	}
 }

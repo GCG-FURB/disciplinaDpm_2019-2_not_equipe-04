@@ -128,6 +128,13 @@ export class AlunoPage implements OnInit {
               });
               toast.present();
             }
+            debugger
+            await this.http.post(`${environment.api}/question/anwser`, {
+              question: this.questionItem,
+              anwser: event.response,
+              asserts: event.response == this.questionItem.answer,
+              player: this.appStorage.getAluno()
+            }).toPromise();
           }
         }
       ]
