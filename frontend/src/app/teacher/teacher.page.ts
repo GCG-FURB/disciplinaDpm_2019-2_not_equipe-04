@@ -3,6 +3,8 @@ import { LoadingController, ActionSheetController, ModalController } from '@ioni
 import { ProductsService } from '../core/entities/products/products.service';
 import { Router } from '@angular/router';
 import { QrcodePage } from '../qrcode/qrcode.page';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-teacher',
@@ -18,7 +20,8 @@ export class TeacherPage {
     private productsService: ProductsService,
     private actionSheetController: ActionSheetController,
     private router: Router,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private http: HttpClient
   ) { }
 
   ionViewWillEnter() {
@@ -52,8 +55,9 @@ export class TeacherPage {
         {
           text: 'Relatórios de respostas',
           icon: 'stats',
-          handler: () => {
-            this.router.navigate([`/teacher/${object.id}/question`]);
+          handler: async () => {
+            const question = await this.http.get(`${environment.api}/question/${object.id}`).toPromise() as any;
+            this.router.navigate([`/teacher/select-report/${question.id}`]);
           }
         },
         {

@@ -11,8 +11,7 @@ const routes: Routes = [
   { path: 'create-account', loadChildren: './create-account/create-account.module#CreateAccountPageModule' },
   { path: 'teacher/produto', loadChildren: './teacher/produto/produto.module#ProdutoPageModule' },
   { path: 'teacher/:produto/question', loadChildren: './teacher/question/question.module#QuestionPageModule' },
-
-
+  { path: 'teacher/select-report/:questionId', loadChildren: './teacher/select-report/select-report.module#SelectReportPageModule' },
 ];
 
 @NgModule({

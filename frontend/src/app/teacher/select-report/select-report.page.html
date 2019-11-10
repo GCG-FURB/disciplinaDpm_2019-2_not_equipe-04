@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/teacher"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Jogadores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="jogadores && jogadores.length > 0">
+    <ion-list *ngFor="let jogador of jogadores">
+      <ion-item (click)="actionSheet(jogador)">
+        <ion-label>{{jogador}}</ion-label>
+        <ion-button>
+          Detalhes
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
