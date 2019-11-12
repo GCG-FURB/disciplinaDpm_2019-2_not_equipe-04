@@ -16,7 +16,7 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
 			"group by player", nativeQuery = true)
 	List<Object> getPlayers(Integer questionId);
 	
-	@Query(value = "SELECT count(asserts) FROM REPORT" + 
+	@Query(value = "SELECT count(asserts) FROM REPORT " + 
 			"where  player = ?1 " + 
 			"group by asserts", nativeQuery = true)
 	List<Object> getReport(String player);

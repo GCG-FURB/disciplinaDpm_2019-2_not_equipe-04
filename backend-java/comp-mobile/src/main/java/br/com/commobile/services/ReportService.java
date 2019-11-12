@@ -26,4 +26,8 @@ public class ReportService {
 		return this.reportRepository.getPlayers(questionId);
 	}
 	
+	public Object getJogo(String jogador) {
+		return this.reportRepository.getReport(jogador);
+	}
+	
 }

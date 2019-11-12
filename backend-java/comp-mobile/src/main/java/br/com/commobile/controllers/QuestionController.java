@@ -43,4 +43,9 @@ public class QuestionController {
 	public Object getPlayers(@PathVariable Integer id) {
 		return this.reportService.getPalyer(id);
 	}
+	
+	@GetMapping(value = "/anwser/{jogador}")
+	public Object getJogador(@PathVariable String jogador) {
+		return this.reportService.getJogo(jogador);
+	}
 }

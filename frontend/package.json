@@ -68,6 +68,7 @@
     "md-gum-polyfill": "^1.0.0",
     "moment": "^2.24.0",
     "ng2-currency-mask": "^5.3.1",
+    "ng2-google-charts": "^4.0.0",
     "ngx-qrcode2": "0.0.9",
     "pdfjs-dist": "^2.1.266",
     "pdfreader": "^1.0.4",

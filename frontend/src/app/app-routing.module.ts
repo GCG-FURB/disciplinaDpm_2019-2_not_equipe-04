@@ -12,6 +12,8 @@ const routes: Routes = [
   { path: 'teacher/produto', loadChildren: './teacher/produto/produto.module#ProdutoPageModule' },
   { path: 'teacher/:produto/question', loadChildren: './teacher/question/question.module#QuestionPageModule' },
   { path: 'teacher/select-report/:questionId', loadChildren: './teacher/select-report/select-report.module#SelectReportPageModule' },
+  { path: 'teacher/report/:player', loadChildren: './teacher/report/report.module#ReportPageModule' },
+
 ];
 
 @NgModule({
