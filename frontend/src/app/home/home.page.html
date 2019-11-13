@@ -1,7 +1,19 @@
 <ion-content>
-  <div class="ion-padding center">
-    <ion-button (click)="goToTeacher()" expand="full">Sou professor</ion-button>
+  <div class="ion-padding" style="height: 25%; text-align: center;">
     <br>
-    <ion-button (click)="presentAlertPrompt()" expand="full">Sou aluno</ion-button>
+    <h1 style="font-size: 55px; color: #333333; font-weight: bold;">Mercadinho</h1>
+  </div>
+  <div class="ion-padding" style="height: 35%; text-align: center;">
+    <p style="font-size: 27px; color: #777777;">Bem vindo
+      <br>
+      Antes de começar suas compras
+      <br>
+      Selecione qual o seu perfil
+    </p>
+  </div>
+  <div class="ion-padding col-md-6 offset-md-3" style="height: 40%;">
+    <ion-button color="dark" (click)="goToTeacher()" expand="block" size="large">Sou professor</ion-button>
+    <br>
+    <ion-button color="danger" (click)="presentAlertPrompt()" expand="block" size="large">Sou aluno</ion-button>
   </div>
 </ion-content>

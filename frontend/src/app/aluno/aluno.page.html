@@ -10,7 +10,7 @@
 </ion-header>
 <div class="{{image ? 'blur' : null}}">
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button side="start" (click)="goToCart()">
+    <ion-fab-button side="start" (click)="goToCart()" color="dark">
       <ion-icon name="cart"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -19,7 +19,7 @@
 <div class="image" *ngIf="product?.image">
   <img class="center" src="{{product?.image}}">
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="question()" side="start">
+    <ion-fab-button (click)="question()" side="start" color="danger">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

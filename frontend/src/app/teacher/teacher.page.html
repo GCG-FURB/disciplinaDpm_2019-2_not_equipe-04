@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-title>Mercadinho</ion-title>
     <ion-buttons slot="secondary">
       <ion-button (click)="exit()">
@@ -15,14 +15,11 @@
       <ion-item (click)="actionSheet(product)">
         <ion-label>{{product?.name}}</ion-label>
         <ion-label>R$ {{product?.price}}</ion-label>
-        <ion-button>
-          Detalhes
-        </ion-button>
       </ion-item>
     </ion-list>
   </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/teacher/produto/new']">
+    <ion-fab-button [routerLink]="['/teacher/produto/new']" color="danger">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

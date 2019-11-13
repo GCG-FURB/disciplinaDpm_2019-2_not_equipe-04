@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+body, span, button, h1, h2, h3, h4, h5, h6, p, ion-item, ion-title {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
 .center {
     margin: 0;
     position: absolute;

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-title>Acesse sua conta</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,16 +10,16 @@
     <form [formGroup]="formGroup">
       <ion-list>
         <ion-item>
-          <ion-label>E-mail</ion-label>
+          <ion-label position="floating">E-mail</ion-label>
           <ion-input formControlName="email"></ion-input>
         </ion-item>
         <br>
         <ion-item>
-          <ion-label>Senha</ion-label>
+          <ion-label position="floating">Senha</ion-label>
           <ion-input type="password" formControlName="password"></ion-input>
         </ion-item>
       </ion-list>
-      <ion-button expand="full" [disabled]="!formGroup.valid" (click)="create()">Acessar</ion-button>
+      <ion-button color="danger" expand="block" (click)="create()">Acessar</ion-button>
     </form>
     <div style="width: 100%; margin-top: 15%;">
       <p align="center">

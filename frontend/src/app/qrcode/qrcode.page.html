@@ -1,10 +1,13 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-title>qrcode</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button click="close()"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ngx-qrcode qrc-class = "aclass" [qrc-element-type]="'url'" [qrc-value]="id">
+  <ngx-qrcode qrc-class="aclass" [qrc-element-type]="'url'" [qrc-value]="id">
   </ngx-qrcode>
 </ion-content>
