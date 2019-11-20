@@ -15,8 +15,8 @@ export class ReportPage implements OnInit {
     chartType: 'PieChart',
     dataTable: [
       ['Status', 'Valor'],
-      ['Erro',     1],
-      ['Acerto',      1]
+      ['Acerto',      1],
+      ['Erro',     1]
     ],
     options: {'title': 'Tentativas de repostas'},
   };
@@ -33,8 +33,8 @@ export class ReportPage implements OnInit {
         chartType: 'PieChart',
         dataTable: [
           ['Status', 'Valor'],
-          ['Erro',    data[0]],
-          ['Acerto',      data[1]]
+          ['Acerto',      data[1]],
+          ['Erro',    data[0]]
         ],
         options: {'title': 'Tasks'},
       };

@@ -35,6 +35,7 @@ export class CreateAccountPage implements OnInit {
     const loader = await this.loadingController.create({
       message: 'Aguarde..'
     });
+    await loader.present();
     try {
       if (this.formGroup.valid) {
         const { value } = this.formGroup;

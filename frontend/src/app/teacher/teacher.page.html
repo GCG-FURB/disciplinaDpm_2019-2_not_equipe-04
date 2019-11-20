@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="products && products.length > 0; else empty">
+  <div *ngIf="!products && products.length > 0; else empty">
     <ion-list *ngFor="let product of products">
       <ion-item (click)="actionSheet(product)">
         <ion-label>{{product?.name}}</ion-label>
@@ -26,5 +26,9 @@
 </ion-content>
 
 <ng-template #empty>
-  <span style="text-align: center;">Não há registros cadastrados</span>
+  <br><br>
+  <div style="width: 100%; text-align: center;">
+      <ion-icon style="font-size: 150px; color: #666666;" name="cart"></ion-icon>
+    <h2 style="text-align: center;">Não há registros cadastrados</h2>
+  </div>
 </ng-template>

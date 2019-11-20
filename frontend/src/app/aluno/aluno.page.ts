@@ -67,7 +67,6 @@ export class AlunoPage implements OnInit {
   private async onQrCode(id) {
     try {
       const product = await this.productService.getProduct(id).toPromise() as any;
-      debugger
       if (product && product.image) {
         this.product = product;
         this.questionItem = await this.http.get(`${environment.api}/question/${product.id}`).toPromise();
@@ -118,6 +117,13 @@ export class AlunoPage implements OnInit {
               cart.push(this.product);
               this.appStorage.setCart(cart);
               this.product = null;
+              const toast = await this.toastController.create({
+                message: 'O produto foi adicionado ao carrinho',
+                duration: 2000,
+                position: "top",
+                color: "success"
+              });
+              toast.present();
               alert.dismiss();
             } else {
               const toast = await this.toastController.create({
@@ -128,7 +134,6 @@ export class AlunoPage implements OnInit {
               });
               toast.present();
             }
-            debugger
             await this.http.post(`${environment.api}/question/anwser`, {
               question: this.questionItem,
               anwser: event.response,

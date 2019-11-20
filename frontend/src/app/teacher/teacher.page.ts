@@ -32,8 +32,9 @@ export class TeacherPage {
     const loader = await this.loadingController.create({
       message: 'Aguarde...'
     });
+    await loader.present();
     this.products = await this.productsService.getProducts().toPromise();
-    loader.dismiss();
+    await loader.dismiss();
   }
 
   public exit() {

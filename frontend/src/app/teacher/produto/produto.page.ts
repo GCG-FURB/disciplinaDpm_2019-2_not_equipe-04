@@ -25,7 +25,7 @@ export class ProdutoPage implements OnInit {
     private productService: ProductsService,
     private appStorageService: AppStorageService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -44,8 +44,13 @@ export class ProdutoPage implements OnInit {
   }
 
   private async getProduct() {
+    const loader = await this.loadingController.create({
+      message: 'Aguarde...'
+    });
+    await loader.present();
     const form = await this.productService.getProduct(this.id).toPromise();
     this.formGroup.patchValue(form);
+    await loader.dismiss();
   }
 
 
@@ -70,6 +75,7 @@ export class ProdutoPage implements OnInit {
     const loader = await this.loadingController.create({
       message: 'Aguarde..'
     });
+    await loader.present();
     try {
       if (this.formGroup.valid) {
         const { value } = this.formGroup;
