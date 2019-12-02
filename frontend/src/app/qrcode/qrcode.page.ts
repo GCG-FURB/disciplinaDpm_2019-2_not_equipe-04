@@ -4,6 +4,7 @@ import { Component, OnInit, Input } from '@angular/core';
   selector: 'app-qrcode',
   templateUrl: './qrcode.page.html',
   styleUrls: ['./qrcode.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class QrcodePage implements OnInit {
 
