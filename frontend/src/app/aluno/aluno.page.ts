@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
 import { Router } from '@angular/router';
@@ -26,7 +26,8 @@ export class AlunoPage implements OnInit {
     private productService: ProductsService,
     private appStorage: AppStorageService,
     private http: HttpClient,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private changeref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -34,7 +35,6 @@ export class AlunoPage implements OnInit {
       .then((status: QRScannerStatus) => {
         if (status.authorized) {
           this.qrScanner.show();
-
         } else if (status.denied) {
           this.androidPermissions.requestPermissions(
             [
@@ -51,10 +51,8 @@ export class AlunoPage implements OnInit {
 
   ionViewWillEnter() {
     setTimeout(() => {
-      if (!this.product) {
-        this.onQrCode(2).then();
-      }
-    });
+      this.qrCode();
+    }, 1000);
   }
 
   private qrCode() {
@@ -70,10 +68,12 @@ export class AlunoPage implements OnInit {
       if (product && product.image) {
         this.product = product;
         this.questionItem = await this.http.get(`${environment.api}/question/${product.id}`).toPromise();
+        this.changeref.detectChanges();
       } else {
         this.qrCode();
       }
     } catch (err) {
+      console.log(err);
       this.qrCode();
     }
   }

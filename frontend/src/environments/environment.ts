@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://192.168.15.34:8090/api'
+  api: 'https://comp-mobile.herokuapp.com/api'
 };
 
 /*

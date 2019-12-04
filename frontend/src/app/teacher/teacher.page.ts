@@ -78,15 +78,7 @@ export class TeacherPage {
                 id: object.id.toString()
               }
             });
-            debugger
             return await modal.present();
-          }
-        },
-        {
-          text: 'Remover',
-          icon: 'trash',
-          handler: () => {
-            console.log('Delete clicked');
           }
         },
         {

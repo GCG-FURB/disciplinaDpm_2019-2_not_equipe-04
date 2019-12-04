@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="!products && products.length > 0; else empty">
+  <div *ngIf="products && products.length > 0; else empty">
     <ion-list *ngFor="let product of products">
       <ion-item (click)="actionSheet(product)">
         <ion-label>{{product?.name}}</ion-label>

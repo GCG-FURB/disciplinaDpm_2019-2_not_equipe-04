@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">192.168.15.34</domain>
+        <domain includeSubdomains="true">herokuapp.com</domain>
     </domain-config>
 </network-security-config>
