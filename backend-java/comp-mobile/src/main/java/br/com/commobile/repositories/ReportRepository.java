@@ -12,7 +12,7 @@ import br.com.commobile.models.Report;
 public interface ReportRepository extends JpaRepository<Report, Integer> {
 
 	@Query(value = "SELECT player FROM REPORT " + 
-			"where ques	tion_id = ?1 " + 
+			"where question_id = ?1 " + 
 			"group by player", nativeQuery = true)
 	List<Object> getPlayers(Integer questionId);
 	
