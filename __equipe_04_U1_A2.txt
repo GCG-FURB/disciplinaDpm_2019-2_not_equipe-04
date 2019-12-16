@@ -1,0 +1,23 @@
+Trabalho Unidade 1: Unidade 1: A2: Escolha três aplicativos
+
+Equipe 04
+Bruno Roger Stupp / Felipe Anselmo dos Santos / Guilherme Adriano Schafer / Jorge Guilherme Kohn / Luiz Carlos Burigo
+Happn
+Aplicativo de relacionamento. Geolocalização, localização em tempo real —> conceito de cerca virtual.
+Quem usa compromissos por localização.
+Exemplo de interpretação de texto “Tomar um café quando chegar em casa”
+
+Wizards Unite
+Jogo para Pockemom GOO -> Jogo do Harry Plotter -> exemplo do JustLine (ArCore Google - ArKit Apple)
+Realidade Virtual -> 
+Realidade Aumentada
+* no braço -> conceito Visão Computacional -> OpenCV
+* ArToolKit
+* Vuforia -> Qualcoom 
+    * ArCore Google - ArKit Apple
+ -> Realidade Aumentada + Alternativa (mobilidade)
+NuBank
+Localização para questões de segurança.
+Mapa de compras.
+Usa QRCode para autorizar o acesso do desktop com o SmartPhone. —> gosto do uso do QRCode.
+Linguagem Funcional.
